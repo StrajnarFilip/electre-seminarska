@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+<form>
+  {% for alternative, indices in full_alternatives %}
+  <article>
+    <h2>{{ alternative }}</h2>
+    <div class="grid">
+      {% for c, i in indices %}
+      <div>
+        <label for="{{i}}">{{ c }}</label>
+        <input name="{{i}}" type="text" />
+      </div>
+      {% endfor %}
+    </div>
+  </article>
+  {% endfor %}
+  <button type="submit">Pošlji zahtevo</button>
+</form>
+{% endblock %}

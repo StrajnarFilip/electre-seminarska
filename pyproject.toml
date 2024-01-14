@@ -24,7 +24,10 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+
+dependencies = [
+  "Flask", "pandas", "numpy"
+]
 
 [project.urls]
 Documentation = "https://github.com/unknown/seminarska-naloga#readme"

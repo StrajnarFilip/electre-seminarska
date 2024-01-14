@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<form method="post">
+    {% for i in number_of_alternatives %}
+    <label for="criteria">Ime alternative številka {{ i + 1 }}</label>
+    <input name="name_{{i}}" type="text">
+    {% endfor %}
+    <button type="submit">Pošlji zahtevo</button>
+</form>
+
+{% endblock %}

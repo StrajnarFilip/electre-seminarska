@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<form method="post" action="/">
+    <label for="alternatives">Koliko alternativ želite</label>
+    <input name="alternatives" type="number">
+    <label for="criteria">Koliko kriterijev želite</label>
+    <input name="criteria" type="number">
+    <button type="submit">Pošlji zahtevo</button>
+</form>
+
+{% endblock %}

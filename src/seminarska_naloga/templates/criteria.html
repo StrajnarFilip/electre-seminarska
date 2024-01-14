@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block content %}
+
+<form method="post">
+    {% for i in number_of_weights %}
+    <label for="criteria">Ime kriterija številka {{ i + 1 }}</label>
+    <input name="name_{{i}}" type="text">
+    <label for="criteria">Utež kriterija številka {{ i + 1}}</label>
+    <input name="value_{{i}}" type="text">
+    {% endfor %}
+    <button type="submit">Pošlji zahtevo</button>
+</form>
+
+{% endblock %}
