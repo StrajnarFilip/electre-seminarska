@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Alternativa</th>
+      <th scope="col">Rang superiornosti</th>
+      <th scope="col">Rang inferiornosti</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for a in alternative_ranks%}
+    <tr>
+      <th scope="row">{{ a[0] }}</th>
+      <td>{{ a[1] }}</td>
+      <td>{{ a[2] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

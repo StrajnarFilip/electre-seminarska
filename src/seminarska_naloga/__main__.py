@@ -24,7 +24,8 @@ def number_of_criteria():
 
 @app.route("/criteria")
 def criteria_view():
-    return render_template("criteria.html", number_of_weights=range(session["criteria"]))
+    return render_template("criteria.html",
+                           number_of_weights=range(session["criteria"]))
 
 
 @app.route("/criteria", methods=["POST"])
@@ -43,7 +44,9 @@ def criteria_submit():
 
 @app.route("/alternatives")
 def alternatives_view():
-    return render_template("alternatives.html", number_of_alternatives=range(session["alternatives"]))
+    return render_template("alternatives.html",
+                           number_of_alternatives=range(
+                               session["alternatives"]))
 
 
 @app.route("/alternatives", methods=["POST"])
@@ -62,22 +65,33 @@ def alternatives_submit():
 def values_view():
     alternatives: list[str] = session["alternatives_values"]
     criteria = session["criteria_values"]
-
-    full_alternatives = [(a, [(c[0], f"{i}_{j}") for j, c in enumerate(criteria)]) for i, a in enumerate(alternatives)]
-    print(full_alternatives)
+    full_alternatives = [(a, [(c[0], f"{i}_{j}")
+                              for j, c in enumerate(criteria)])
+                         for i, a in enumerate(alternatives)]
     return render_template("values.html", full_alternatives=full_alternatives)
+
 
 @app.route("/values", methods=["POST"])
 def values_submit():
     alternatives: list[str] = session["alternatives_values"]
     criteria = session["criteria_values"]
-    data = numpy.array([[float(request.form[f"{i}_{j}"]) for j,_ in enumerate(criteria) ] for i,_ in enumerate(alternatives)])
+    data = numpy.array(
+        [[float(request.form[f"{i}_{j}"]) for j, _ in enumerate(criteria)]
+         for i, _ in enumerate(alternatives)])
     weights = [c[1] for c in criteria]
-    print(data)
-    print(weights)
-    calculated = electre_method(weights,data)
-    print(calculated)
-    return calculated
+    calculated = electre_method(weights, data)
+    session["results"] = calculated
+    return redirect("/results")
+
+
+@app.route("/results")
+def results_view():
+    results = session["results"]
+    alternatives = session["alternatives_values"]
+    alternative_ranks = [(a, results[0][i], results[1][i])
+                         for i, a in enumerate(alternatives)]
+    return render_template("results.html", alternative_ranks=alternative_ranks)
+
 
 app.config.update(SECRET_KEY=urandom(32).hex())
 
