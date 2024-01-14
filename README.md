@@ -1,21 +1,17 @@
-# seminarska-naloga
+# Kako zagnati projekt
 
-[![PyPI - Version](https://img.shields.io/pypi/v/seminarska-naloga.svg)](https://pypi.org/project/seminarska-naloga)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/seminarska-naloga.svg)](https://pypi.org/project/seminarska-naloga)
 
------
+Najprej kloniramo projekt, se postavimo v mapo projekta in namestimo vse dependency-je:
 
-**Table of Contents**
-
-- [Installation](#installation)
-- [License](#license)
-
-## Installation
-
-```console
-pip install seminarska-naloga
+```bash 
+git clone https://github.com/StrajnarFilip/electre-seminarska.git
+cd electre-seminarska
+python -m pip install .
+# Na linux je lahko tudi: pip3 install .
 ```
 
-## License
+Zaženemo projekt z ukazom:
 
-`seminarska-naloga` is distributed under the terms of the [Apache-2.0](https://spdx.org/licenses/Apache-2.0.html) license.
+```bash
+python -m seminarska_naloga
+```
