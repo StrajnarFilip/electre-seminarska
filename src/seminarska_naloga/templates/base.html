@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/pico.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/pico.css" />
     <title>Filip Electre</title>
-</head>
-<body>
-    <main class="container">{% block content %}{% endblock %}</main>
-</body>
+  </head>
+  <body>
+    <main class="container">
+      <nav>
+        <ul>
+          <li><strong>Electre metoda</strong></li>
+        </ul>
+        <ul>
+          <li><a href="/" role="button">Domov</a></li>
+        </ul>
+      </nav>
+      <br />
+      <br />
+      {% block content %}{% endblock %}
+    </main>
+  </body>
 </html>
