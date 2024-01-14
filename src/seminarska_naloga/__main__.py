@@ -1,5 +1,7 @@
 from flask import Flask, render_template, make_response, request, session, redirect
 from os import urandom, environ
+import numpy
+from seminarska_naloga.calculate import electre_method
 
 app = Flask(
     __name__,
@@ -58,13 +60,24 @@ def alternatives_submit():
 
 @app.route("/values")
 def values_view():
-    alternatives = session["alternatives_values"]
+    alternatives: list[str] = session["alternatives_values"]
     criteria = session["criteria_values"]
 
     full_alternatives = [(a, [(c[0], f"{i}_{j}") for j, c in enumerate(criteria)]) for i, a in enumerate(alternatives)]
     print(full_alternatives)
     return render_template("values.html", full_alternatives=full_alternatives)
 
+@app.route("/values", methods=["POST"])
+def values_submit():
+    alternatives: list[str] = session["alternatives_values"]
+    criteria = session["criteria_values"]
+    data = numpy.array([[float(request.form[f"{i}_{j}"]) for j,_ in enumerate(criteria) ] for i,_ in enumerate(alternatives)])
+    weights = [c[1] for c in criteria]
+    print(data)
+    print(weights)
+    calculated = electre_method(weights,data)
+    print(calculated)
+    return calculated
 
 app.config.update(SECRET_KEY=urandom(32).hex())
 

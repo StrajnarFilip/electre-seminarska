@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-<form>
+<form method="post">
   {% for alternative, indices in full_alternatives %}
   <article>
     <h2>{{ alternative }}</h2>
@@ -13,6 +13,6 @@
     </div>
   </article>
   {% endfor %}
-  <button type="submit">Pošlji zahtevo</button>
+  <button type="submit">Pošlji podatke</button>
 </form>
 {% endblock %}
