@@ -1,12 +1,11 @@
-from numpy import array, sum as numpy_sum, sqrt as square_root, delete, insert, max as numpy_max
+from numpy import array, sum as numpy_sum, sqrt as square_root, delete, insert, ndenumerate, max as numpy_max
 
 
 def electre_method(weights: list[float], data):
     squared_data = data.copy()
 
-    for row in range(squared_data.shape[0]):
-        for column in range(squared_data.shape[1]):
-            squared_data[row, column] *= squared_data[row, column]
+    for (row, column), value in ndenumerate(squared_data):
+        squared_data[row, column] = value**2
 
     sum_data = squared_data.transpose()
 
@@ -15,12 +14,11 @@ def electre_method(weights: list[float], data):
         for row in range(sum_data.shape[0])
     ]
 
-    for row in range(data.shape[0]):
-        for column in range(data.shape[1]):
-            data[row, column] /= normalized_data[column]
-            data[row, column] *= weights[column]
-
     weighted_matrix = data.copy()
+
+    for (row, column), value in ndenumerate(weighted_matrix):
+        weighted_matrix[row, column] /= normalized_data[column]
+        weighted_matrix[row, column] *= weights[column]
 
     def calculate_set_row(set_row: int):
         current_row = weighted_matrix[set_row]
